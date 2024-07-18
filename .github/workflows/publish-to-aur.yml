@@ -1,0 +1,33 @@
+name: publish-to-aur
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  test:
+    uses: ./.github/workflows/validate-package.yml
+  publish_aur_package:
+    name: Publish AUR package
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/release-')
+    steps:
+      - uses: actions/checkout@v4
+      - name: get version
+        id: get_version
+        run: |
+            version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/release-//')
+            echo "pkg_version={version}" >> $GITHUB_ENV
+      - name: Publish aarch64-none-elf-gcc-bin to the AUR
+        uses: KSXGitHub/github-actions-deploy-aur@v2.7.2
+        with:
+          pkgname: aarch64-none-elf-gcc-bin
+          pkgbuild: ./aarch64-none-elf-gcc-aur/PKGBUILD
+
+          commit_username: ${{ secrets.AUR_USERNAME }}
+          commit_email: ${{ secrets.AUR_EMAIL }}
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+          commit_message: 'Update PKGBUILD to version ${{  env.pkg_version }}'
+          force_push: 'true'
