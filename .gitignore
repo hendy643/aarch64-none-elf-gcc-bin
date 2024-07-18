@@ -1,13 +1,5 @@
-*.tar
-*.tar.*
-*.jar
-*.exe
-*.msi
-*.zip
-*.tgz
-*.log
-*.log.*
-*.sig
-
 pkg/
 src/
+gitkraken*.tar*
+v*.tar.gz*
+.idea/
