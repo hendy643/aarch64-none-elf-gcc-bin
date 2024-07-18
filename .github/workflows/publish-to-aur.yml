@@ -5,6 +5,8 @@ on:
     tags:
       - '*'
 
+permissions: read-all
+
 jobs:
   test:
     uses: ./.github/workflows/validate-package.yml
