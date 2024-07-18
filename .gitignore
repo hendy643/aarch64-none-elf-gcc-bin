@@ -1,5 +1,7 @@
 pkg/
 src/
-gitkraken*.tar*
+arm-gnu-toolchain*.tar*
 v*.tar.gz*
 .idea/
+.vscode/
+.vs/
