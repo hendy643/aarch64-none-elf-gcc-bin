@@ -22,6 +22,7 @@ jobs:
         run: |+
           version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/release-//')
           echo "pkg_version={version}" >> $GITHUB_ENV
+          echo "Version Found: ${version}"
       - name: Publish aarch64-none-elf-gcc-bin to the AUR
         uses: KSXGitHub/github-actions-deploy-aur@v2.7.2
         with:
