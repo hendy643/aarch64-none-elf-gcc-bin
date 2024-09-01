@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Publish aarch64-none-elf-gcc-bin to the AUR
-        uses: KSXGitHub/github-actions-deploy-aur@v2.7.2
+        uses: KSXGitHub/github-actions-deploy-aur@v3.0.1
         with:
           pkgname: aarch64-none-elf-gcc-bin
           pkgbuild: ./aarch64-none-elf-gcc-aur/PKGBUILD
